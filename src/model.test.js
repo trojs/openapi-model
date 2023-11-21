@@ -9,7 +9,8 @@ test('Test the openapiToModel helpers', async (t) => {
       properties: {
         foo: {
           type: 'string',
-          default: 'bar'
+          default: 'bar',
+          example: 'baz'
         },
         bar: {
           type: 'number',

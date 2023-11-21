@@ -1,5 +1,7 @@
 import Ajv from 'ajv'
-const ajv = new Ajv()
+const ajv = new Ajv({
+  strictSchema: false
+})
 
 /**
  * @typedef {import('./schema.d.ts').OpenAPIV3.BaseSchemaObject} BaseSchemaObject
