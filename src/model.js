@@ -1,6 +1,6 @@
 import Ajv from 'ajv'
 const ajv = new Ajv({
-  strictSchema: false
+  strict: false
 })
 
 /**
