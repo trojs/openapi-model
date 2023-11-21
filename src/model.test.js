@@ -49,6 +49,11 @@ test('Test the openapiToModel helpers', async (t) => {
       expected
     )
 
+    assert.deepEqual(
+      response.data,
+      expected
+    )
+
     const response2 = new ExampleModel({
       bar: 3.14
     })
@@ -106,6 +111,33 @@ test('Test the openapiToModel helpers', async (t) => {
             schemaPath: '#/properties/baz/required'
           }
         ]
+      )
+      assert.deepEqual(
+        error.schema,
+        spec
+      )
+      assert.deepEqual(
+        error.data,
+        {
+          baz: {
+            qux: '42'
+          }
+        }
+      )
+      assert.deepEqual(
+        error.newData,
+        {
+          bar: 42,
+          baz: {
+            qux: '42'
+          },
+          foo: 'bar'
+        }
+
+      )
+      assert.deepEqual(
+        error.emptyObject,
+        { foo: 'bar', bar: 42, baz: { qux: undefined, quux: 3.14 } }
       )
     }
   })

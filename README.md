@@ -1,16 +1,16 @@
-# OpenAPI server
+# OpenAPI Model
 
-[![NPM version][npm-image]][npm-url] [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-server&metric=coverage)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-server) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-server&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-server) 
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-server&metric=bugs)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-server) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-server&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-server) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-server&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-server) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-server&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-server)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-server&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-server) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-server&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-server) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-server&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-server)
+[![NPM version][npm-image]][npm-url] [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-model&metric=coverage)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-model) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-model&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-model) 
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-model&metric=bugs)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-model) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-model&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-model) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-model&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-model) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-model&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-model)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-model&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-model) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-model&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-model) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=hckrnews_openapi-model&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=hckrnews_openapi-model)
 
-Create easy a webserver API first with a OpenAPI spec.
+Create easy a Model from a OpenAPI spec.
 
 ## Installation
 
-`npm install @hckrnews/openapi-server`
+`npm install @hckrnews/openapi-model`
 or
-`yarn add @hckrnews/openapi-server`
+`yarn add @hckrnews/openapi-model`
 
 ## Test the package
 
@@ -21,56 +21,87 @@ or
 ## How to use
 
 ```javascript
-
-const controllers = {
-    // connect to a openationId in the OpenAPI spec with the same name
-    getTest: ({
-        context,
-        request,
-        response,
-        parameters,
-        specification,
-        url
-      }) => ({ //response an object
-        test: 'ok'
-    })
-}
-
-const { openAPISpecification, Api } = await openAPI({ file: './openapi-spec.json', base })
-const api = new Api({
-  version: 'v1',
-  specification: openAPISpecification,
-  controllers,
-  secret: 'test',
-  logger: console
-})
-const { app } = await setupServer({
-  env: process.env,
-  apis: [api]
-})
-
-```
-
-If you create a controller, you can easy connect it to the operationId in the OpenAPI spec.
-Check also the examples in the test files.
-In your controller you can use e.g. context, request and response, from express.
-It isn neccesary to define it in your controller, if you don't use it, you can remove it.
-e.g.
-```javascript
-getTest: ({ parameters }) => 
-    {
-        return {
-            test: 'ok'
+const schema = {
+    type: 'object',
+    properties: {
+        foo: {
+            type: 'string',
+            default: 'bar'
         }
+    },
+    required: ['foo'],
+    additionalProperties: false
+}
+const ExampleModel = openapiToModel(schema)
+
+// Create an empty model, with the default values
+const example = new ExampleModel()
+/*
+{
+    foo: 'bar'
+}
+*/
+
+// Create a model with the default values, but overwrite the given properties
+const example2 = new ExampleModel({
+    foo: 'It works!'
+})
+/*
+{
+    foo: 'It works!'
+}
+*/
+
+// Create a model with the default values, but overwrite the given properties
+const example2 = new ExampleModel({
+    foo: 3.14
+})
+/*
+    Throws an Error because the type is wrong
+
+    error.message
+    "Invalid data"
+
+    error.errors
+    [
+      {
+        instancePath: '/foo',
+        keyword: 'type',
+        message: 'must be string',
+        params: {
+          type: 'string'
+        },
+        schemaPath: '#/properties/foo/type'
+      }
+    ]
+
+    error.schema
+    {
+        type: 'object',
+        properties: {
+            foo: {
+                type: 'string',
+                default: 'bar'
+            }
+        },
+        required: ['foo'],
+        additionalProperties: false
     }
+
+    // The object that is send to the model
+    error.data
+    {
+        foo: 3.14
+    }
+
+    // The object that is send to the model, but also with the default values
+    error.newData
+    {
+        foo: 3.14
+    }
+*/
 ```
 
-parameters are query param's from the url of a get request, parsed by the type defined in the OpenAPI spec.
 
-Specifications is the OpenAPI spec.
-
-Url is the current url.
-
-
-[npm-url]: https://www.npmjs.com/package/@hckrnews/openapi-server
-[npm-image]: https://img.shields.io/npm/v/@hckrnews/openapi-server.svg
+[npm-url]: https://www.npmjs.com/package/@hckrnews/openapi-model
+[npm-image]: https://img.shields.io/npm/v/@hckrnews/openapi-model.svg
