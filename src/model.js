@@ -1,7 +1,9 @@
 import Ajv from 'ajv'
+import addFormats from 'ajv-formats'
 const ajv = new Ajv({
   strict: false
 })
+addFormats(ajv)
 
 /**
  * @typedef {import('./schema.d.ts').OpenAPIV3.BaseSchemaObject} BaseSchemaObject
