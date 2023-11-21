@@ -42,5 +42,5 @@ export class Model {
 }
 export function openapiToModel(
     schema: BaseSchemaObject,
-    options: Options
+    options?: Options
 ): Model;
