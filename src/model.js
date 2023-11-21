@@ -4,6 +4,8 @@ const ajv = new Ajv()
 /**
  * @typedef {import('./schema.d.ts').OpenAPIV3.BaseSchemaObject} BaseSchemaObject
  * @typedef {import('./schema.d.ts').OpenAPIV3.SchemaObject} SchemaObject
+ * @typedef {import('./schema.d.ts').Options} Options
+ * @typedef {import('./schema.d.ts').Model} Model
  */
 
 /**
@@ -30,8 +32,6 @@ const createBaseObjectFromSchema = (schema) => Object.fromEntries(
 )
 
 /**
- * @typedef {object} Options
- * @property {boolean} [validate=true]
  * @param {BaseSchemaObject} schema
  * @param {Options} options
  * @returns {any}
