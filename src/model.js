@@ -98,5 +98,7 @@ const openapiToModel = (schema, options = {}) => {
 }
 
 export {
-  openapiToModel
+  openapiToModel,
+  createBaseObjectFromSchema,
+  createPropertyWithDefaultValue
 }
