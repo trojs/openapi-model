@@ -33,7 +33,7 @@ const createBaseObjectFromSchema = (schema) => Object.fromEntries(
 
 /**
  * @param {BaseSchemaObject} schema
- * @param {Options} options
+ * @param {Options=} options
  * @returns {any}
  */
 const openapiToModel = (schema, options = {}) => {
