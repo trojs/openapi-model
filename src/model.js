@@ -3,7 +3,7 @@ import addFormats from 'ajv-formats'
 const ajv = new Ajv({
   strict: false
 })
-addFormats(ajv, ['date', 'time'])
+addFormats(ajv, ['date', 'time', 'uri', 'uuid', 'email', 'hostname', 'regex'])
 
 /**
  * @typedef {import('./schema.d.ts').OpenAPIV3.BaseSchemaObject} BaseSchemaObject
