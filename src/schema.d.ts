@@ -38,10 +38,10 @@ export interface Options {
 }
 
 export declare class Model {
-    constructor(data: object);
+    constructor(data?: object);
     data: object;
     value: object;
-    set data(data: object): void;
+    set data(data?: object): void;
     get data(): object;
     valueOf(): object;
 }
