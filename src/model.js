@@ -1,10 +1,7 @@
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
-const ajv = new Ajv({
-  strict: false
-})
-addFormats(ajv, ['date', 'time', 'uri', 'uuid', 'email', 'hostname', 'regex'])
 
+const defaultExtraAjvFormats = ['date', 'time', 'uri', 'uuid', 'email', 'hostname', 'regex']
 /**
  * @typedef {import('./schema.d.ts').OpenAPIV3.BaseSchemaObject} BaseSchemaObject
  * @typedef {import('./schema.d.ts').OpenAPIV3.SchemaObject} SchemaObject
@@ -43,6 +40,12 @@ const createBaseObjectFromSchema = (schema) => Object.fromEntries(
 const openapiToModel = (schema, options = {}) => {
   const { validate = true } = options
   const emptyObject = createBaseObjectFromSchema(schema)
+
+  const ajv = new Ajv({
+    strict: options.strict || false
+  })
+  const extraAjvFormats = options.extraAjvFormats || []
+  addFormats(ajv, [...defaultExtraAjvFormats, ...extraAjvFormats])
   const compile = ajv.compile(schema)
 
   class Model {
