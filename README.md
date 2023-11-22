@@ -32,7 +32,14 @@ const schema = {
     required: ['foo'],
     additionalProperties: false
 }
-const ExampleModel = openapiToModel(schema)
+
+const options = {
+    validate: true,
+    strict: false,
+    extraAjvFormats: ['date-time']
+}
+
+const ExampleModel = openapiToModel(schema, options)
 
 // Create an empty model, with the default values
 const example = new ExampleModel()
