@@ -56,7 +56,7 @@ const openapiToModel = (schema, options = {}) => {
 
     /**
      * Set the data for the model, including defaults, and validate it against the schema
-     * @param {object} data
+     * @param {object=} data
      */
     set data (data) {
       const newData = {
