@@ -33,6 +33,8 @@ export declare namespace OpenAPIV3 {
 
 export interface Options {
     validate?: boolean;
+    strict?: boolean;
+    extraAjvFormats?: any[];
 }
 export class Model {
     constructor(data?: object);
