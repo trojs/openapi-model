@@ -32,11 +32,6 @@ const createBaseObjectFromSchema = (schema) => Object.fromEntries(
   Object.entries(schema.properties).map(createPropertyWithDefaultValue)
 )
 
-/**
- * @param {BaseSchemaObject} schema
- * @param {Options=} options
- * @returns {any}
- */
 const openapiToModel = (schema, options = {}) => {
   const { validate = true } = options
   const emptyObject = createBaseObjectFromSchema(schema)

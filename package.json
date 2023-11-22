@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/openapi-model",
     "description": "OpenAPI Model",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"

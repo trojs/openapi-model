@@ -36,13 +36,17 @@ export interface Options {
     strict?: boolean;
     extraAjvFormats?: any[];
 }
-export class Model {
-    constructor(data?: object);
-    set data(data: object);
+
+export declare class Model {
+    constructor(data: object);
+    data: object;
+    value: object;
+    set data(data: object): void;
     get data(): object;
-    valueOf(): any;
+    valueOf(): object;
 }
+
 export function openapiToModel(
     schema: BaseSchemaObject,
     options?: Options
-): Model;
+): typeof Model;
