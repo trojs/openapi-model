@@ -1,12 +1,12 @@
 {
     "name": "@hckrnews/openapi-model",
     "description": "OpenAPI Model",
-    "version": "0.2.5",
+    "version": "0.2.6",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
     },
-    "license": "LGPL-3.0",
+    "license": "MIT",
     "scripts": {
         "lint": "eslint src/*.js --config .eslintrc",
         "lint:report": "eslint src/*.js --config .eslintrc -f json -o report.json",
