@@ -1,5 +1,6 @@
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
+import { deepMerge } from '@hckrnews/deep-merge'
 
 const defaultExtraAjvFormats = ['date', 'time', 'uri', 'uuid', 'email', 'hostname', 'regex']
 /**
@@ -49,7 +50,7 @@ const openapiToModel = (schema, options = {}) => {
      */
     constructor (data) {
       this.errors = undefined
-      this.data = data
+      this.data = data || {}
       this.schema = schema
       this.emptyObject = emptyObject
     }
@@ -59,10 +60,7 @@ const openapiToModel = (schema, options = {}) => {
      * @param {object=} data
      */
     set data (data) {
-      const newData = {
-        ...emptyObject,
-        ...data
-      }
+      const newData = deepMerge(emptyObject, data)
       const valid = compile(newData)
 
       if (validate && !valid) {
