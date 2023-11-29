@@ -94,7 +94,7 @@ test('Test the openapiToModel helpers', async (t) => {
       // eslint-disable-next-line no-new
       new ExampleModel({
         baz: {
-          qux: '42'
+          qux: 42
         }
       })
     } catch (error) {
@@ -103,13 +103,13 @@ test('Test the openapiToModel helpers', async (t) => {
         error.errors,
         [
           {
-            instancePath: '/baz',
-            keyword: 'required',
-            message: "must have required property 'quux'",
+            instancePath: '/baz/qux',
+            keyword: 'type',
+            message: 'must be string',
             params: {
-              missingProperty: 'quux'
+              type: 'string'
             },
-            schemaPath: '#/properties/baz/required'
+            schemaPath: '#/properties/baz/properties/qux/type'
           }
         ]
       )
@@ -130,6 +130,7 @@ test('Test the openapiToModel helpers', async (t) => {
         {
           bar: 42,
           baz: {
+            quux: 3.14,
             qux: '42'
           },
           foo: 'bar'
