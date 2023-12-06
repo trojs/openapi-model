@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/openapi-model",
     "description": "OpenAPI Model",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -63,6 +63,6 @@
     },
     "overrides": {
         "semver": "^7.5.3",
-        "xml2js": "^0.5.0"
+        "xml2js": "^0.6.0"
     }
 }
