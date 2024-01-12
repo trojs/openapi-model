@@ -1,7 +1,7 @@
 {
     "name": "@hckrnews/openapi-model",
     "description": "OpenAPI Model",
-    "version": "0.3.2",
+    "version": "0.4.0",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://hckr.news/"
@@ -12,8 +12,9 @@
         "lint:report": "eslint src/*.js --config .eslintrc -f json -o report.json",
         "lint:fix": "eslint src/*.js --config .eslintrc --fix",
         "lint:rules": "eslint --print-config file.js > eslintconfig.json",
-        "test": "c8 node --test src/*.test.js",
-        "test:watch": "c8 node --watch --test src/*.test.js",
+        "test": "node --test src/*.test.js",
+        "test:watch": "node --watch --test src/*.test.js",
+        "test:coverage": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.info src/*.test.js",
         "cpd": "node_modules/jscpd/bin/jscpd src",
         "vulnerabilities": "npm audit --omit=dev"
     },
@@ -26,7 +27,6 @@
     "types": "src/schema.d.ts",
     "devDependencies": {
         "@hckrnews/eslint-config": "^3.0.0",
-        "c8": "^9.0.0",
         "eslint": "^8.23.0",
         "eslint-config-standard": "^17.1.0",
         "eslint-plugin-import": "^2.26.0",
