@@ -8,9 +8,9 @@ Create easy a Model from a OpenAPI spec.
 
 ## Installation
 
-`npm install @hckrnews/openapi-model`
+`npm install @trojs/openapi-model`
 or
-`yarn add @hckrnews/openapi-model`
+`yarn add @trojs/openapi-model`
 
 ## Test the package
 
@@ -110,5 +110,5 @@ const example2 = new ExampleModel({
 ```
 
 
-[npm-url]: https://www.npmjs.com/package/@hckrnews/openapi-model
-[npm-image]: https://img.shields.io/npm/v/@hckrnews/openapi-model.svg
+[npm-url]: https://www.npmjs.com/package/@trojs/openapi-model
+[npm-image]: https://img.shields.io/npm/v/@trojs/openapi-model.svg

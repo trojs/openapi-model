@@ -1,6 +1,6 @@
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
-import { deepMerge } from '@hckrnews/deep-merge'
+import { deepMerge } from '@trojs/deep-merge'
 
 const defaultExtraAjvFormats = ['date', 'time', 'uri', 'uuid', 'email', 'hostname', 'regex']
 /**
