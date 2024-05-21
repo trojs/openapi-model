@@ -1,10 +1,10 @@
 {
-    "name": "@hckrnews/openapi-model",
+    "name": "@trojs/openapi-model",
     "description": "OpenAPI Model",
-    "version": "0.4.1",
+    "version": "0.5.0",
     "author": {
         "name": "Pieter Wigboldus",
-        "url": "https://hckr.news/"
+        "url": "https://trojs.org/"
     },
     "license": "MIT",
     "scripts": {
@@ -53,7 +53,7 @@
         "ajv"
     ],
     "dependencies": {
-        "@hckrnews/deep-merge": "^0.3.0",
+        "@trojs/deep-merge": "^0.4.0",
         "ajv": "^8.12.0",
         "ajv-formats": "^2.1.1"
     },
