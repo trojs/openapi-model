@@ -1,7 +1,7 @@
 {
     "name": "@trojs/openapi-model",
     "description": "OpenAPI Model",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "author": {
         "name": "Pieter Wigboldus",
         "url": "https://trojs.org/"
@@ -34,7 +34,7 @@
         "eslint-plugin-n": "^16.0.0",
         "eslint-plugin-promise": "^6.0.1",
         "eslint-plugin-sonarjs": "^0.23.0",
-        "jscpd": "^3.2.1"
+        "jscpd": "^4.0.0"
     },
     "repository": {
         "type": "git",
