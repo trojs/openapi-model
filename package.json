@@ -27,7 +27,7 @@
     "types": "src/schema.d.ts",
     "devDependencies": {
         "@hckrnews/eslint-config": "^3.0.0",
-        "eslint": "^8.23.0",
+        "eslint": "^9.0.0",
         "eslint-config-standard": "^17.1.0",
         "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-jsdoc": "^48.0.0",
