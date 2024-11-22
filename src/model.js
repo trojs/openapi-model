@@ -15,14 +15,14 @@ const defaultExtraAjvFormats = ['date', 'time', 'uri', 'uuid', 'email', 'hostnam
  * @returns {[key: string, defaultValue: any]}
  */
 const createPropertyWithDefaultValue = ([key, schema]) => {
-  const { type, default: defaultValue } = schema
+    const { type, default: defaultValue } = schema
 
-  if (type === 'object') {
-    const subParser = createBaseObjectFromSchema(schema)
-    return [key, subParser]
-  }
+    if (type === 'object') {
+        const subParser = createBaseObjectFromSchema(schema)
+        return [key, subParser]
+    }
 
-  return [key, defaultValue]
+    return [key, defaultValue]
 }
 
 /**
@@ -30,75 +30,75 @@ const createPropertyWithDefaultValue = ([key, schema]) => {
  * @returns {object}
  */
 const createBaseObjectFromSchema = (schema) => Object.fromEntries(
-  Object.entries(schema.properties).map(createPropertyWithDefaultValue)
+    Object.entries(schema.properties).map(createPropertyWithDefaultValue)
 )
 
 const openapiToModel = (schema, options = {}) => {
-  const { validate = true } = options
-  const emptyObject = createBaseObjectFromSchema(schema)
+    const { validate = true } = options
+    const emptyObject = createBaseObjectFromSchema(schema)
 
-  const ajv = new Ajv({
-    strict: options.strict || false
-  })
-  const extraAjvFormats = options.extraAjvFormats || []
-  addFormats(ajv, [...defaultExtraAjvFormats, ...extraAjvFormats])
-  const compile = ajv.compile(schema)
+    const ajv = new Ajv({
+        strict: options.strict || false
+    })
+    const extraAjvFormats = options.extraAjvFormats || []
+    addFormats(ajv, [...defaultExtraAjvFormats, ...extraAjvFormats])
+    const compile = ajv.compile(schema)
 
-  class Model {
+    class Model {
     /**
      * @param {object=} data
      */
-    constructor (data) {
-      this.errors = undefined
-      this.data = data || {}
-      this.schema = schema
-      this.emptyObject = emptyObject
-    }
+        constructor (data) {
+            this.errors = undefined
+            this.data = data || {}
+            this.schema = schema
+            this.emptyObject = emptyObject
+        }
 
-    /**
-     * Set the data for the model, including defaults, and validate it against the schema
-     * @param {object=} data
-     */
-    set data (data) {
-      const newData = deepMerge(emptyObject, data)
-      const valid = compile(newData)
+        /**
+         * Set the data for the model, including defaults, and validate it against the schema
+         * @param {object=} data
+         */
+        set data (data) {
+            const newData = deepMerge(emptyObject, data)
+            const valid = compile(newData)
 
-      if (validate && !valid) {
-        const error = new Error('Invalid data')
-        // @ts-ignore
-        error.errors = compile.errors
-        // @ts-ignore
-        error.schema = schema
-        // @ts-ignore
-        error.data = data
-        // @ts-ignore
-        error.newData = newData
-        // @ts-ignore
-        error.emptyObject = emptyObject
-        throw error
-      }
-      this.value = newData
-    }
+            if (validate && !valid) {
+                const error = new Error('Invalid data')
+                // @ts-ignore
+                error.errors = compile.errors
+                // @ts-ignore
+                error.schema = schema
+                // @ts-ignore
+                error.data = data
+                // @ts-ignore
+                error.newData = newData
+                // @ts-ignore
+                error.emptyObject = emptyObject
+                throw error
+            }
+            this.value = newData
+        }
 
-    /**
-     * @returns {object}
-     */
-    get data () {
-      return this.value
-    }
+        /**
+         * @returns {object}
+         */
+        get data () {
+            return this.value
+        }
 
-    /**
-     * @returns {object}
-     */
-    valueOf () {
-      return this.value
+        /**
+         * @returns {object}
+         */
+        valueOf () {
+            return this.value
+        }
     }
-  }
-  return Model
+    return Model
 }
 
 export {
-  openapiToModel,
-  createBaseObjectFromSchema,
-  createPropertyWithDefaultValue
+    openapiToModel,
+    createBaseObjectFromSchema,
+    createPropertyWithDefaultValue
 }
